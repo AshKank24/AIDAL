@@ -16,7 +16,6 @@ import requests
 
 from pymongo import MongoClient
 from datetime import datetime
-from enum import Enum as PyEnum
 
 
 # Connect to MongoDB
@@ -54,7 +53,6 @@ def execute_code(code : str):
     except Exception as e:
         return e
         
-
 
 @tool
 def search(query: str):
