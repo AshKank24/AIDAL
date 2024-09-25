@@ -4,8 +4,10 @@ from langchain_core.tools import tool
 from langchain_groq import ChatGroq
 from langchain_core.runnables.history import RunnableWithMessageHistory
 from langchain.memory import ChatMessageHistory
-
+import os
 import streamlit as st
+import google.generativeai as genai
+
 
 
 from datetime import datetime
@@ -13,21 +15,57 @@ import pytz
 from duckduckgo_search import DDGS
 from langchain_community.tools import DuckDuckGoSearchResults
 import requests
+from dotenv import load_dotenv
 
 from pymongo import MongoClient
 from datetime import datetime
 
+load_dotenv()
+
+genai.configure(api_key=os.environ["GEMINI"])
+
+
+model = genai.GenerativeModel(
+model_name="gemini-1.5-flash",
+# safety_settings = Adjust safety settings
+# See https://ai.google.dev/gemini-api/docs/safety-settings
+tools='code_execution',
+)
+
+chat_session = model.start_chat(
+    history=[
+    ]
+    )
+groq_api_key = os.getenv("GROQ")
 
 # Connect to MongoDB
-client = MongoClient('mongodb://localhost:27017/')  # Replace with your MongoDB connection string
-db = client['reminder_db']
-collection = db['reminders']
+# client = MongoClient('mongodb://localhost:27017/')  # Replace with your MongoDB connection string
+# db = client['reminder_db']
+# collection = db['reminders']
 
-db = client['task_manager']
-task_collection = db['tasks']
+# db = client['task_manager']
+# task_collection = db['tasks']
 
 ddg_search_langchain = DuckDuckGoSearchResults()
 
+@tool
+def search(query: str):
+    """Searches for a query on the Internet and returns the results, use only when required
+
+    Args:
+        query: The query which needs to be searched on the internet
+    """
+
+    try:
+        # results = DDGS().text(query)
+        results = ddg_search_langchain.invoke(query)
+        print(query)
+    except Exception as e:
+        print(e)
+        results = chat_session.send_message(query)
+        # print(response)
+        return results.text
+    return str(results.text)
 
 @tool
 def get_date_time(place : str = 'Asia/Kolkata'):
@@ -41,45 +79,56 @@ def get_date_time(place : str = 'Asia/Kolkata'):
     return current_datetime
 
 @tool
-def execute_code(code : str):
-    """executes the code and returns the output.
+def execute_code(code : str , query : str):
+    """generates the code or executes the code and returns the output.
 
     Args:
-        code : The code which needs to be executed
+        code : The code which needs to be executed or query needs to be generated
     """
+
     try:
-        res = exec(code)
-        return res
+        response = chat_session.send_message("Execute this code and return me the output and your observations on the code and its correctness. \nCODE : \n" + code)
+        # print(response)
+        if 'executable_code' in response:
+            print(str(response.executable_code) + response.text)
+            return str(response.executable_code) + response.text
+        else:
+            return response.text
     except Exception as e:
         return e
         
-
 @tool
-def search(query: str):
-    """Searches for a query on the Internet use only when required
+def generate_code(query : str):
+    """returns the code for a given query , you have to return this code to the user.
 
     Args:
-        query: The query which needs to be searched on the internet
+        query : The query for the code which is to be written
     """
 
+    print('GENERATE CODE CALLED')
+
     try:
-        # results = DDGS().text(query)
-        results = ddg_search_langchain.invoke(query)
-        print(query)
+        response = chat_session.send_message("Generate the code for " + query)
+        print(response)
+        # print(response.executable_code)
+        # if 'executable_code' in response:
+            # print(str(response.executable_code) + response.text)
+        return  response.text
+        # else:
+            # return response.text
     except Exception as e:
-        print(e)
-        results = "There are some issues with Search Engine Right Now"
-    return str(results)
+        return e
 
 @tool
 def scrape(url: str):
-    """Scrapes the contents from a Website on Internet, use only when required
+    """Scrapes the contents from a Website on Internet and returns the content, use only when required
 
     Args:
         url: The  url of the website which needs to be scraped
     """
 
     try:
+        print('SCRAPE CALLED')
 
         url = 'https://r.jina.ai/' + url
         response = requests.get(url)
@@ -94,16 +143,17 @@ prompt = ChatPromptTemplate.from_messages(
     [
         (
             "system",
-            f"You are CerebroX, a highly intelligent and helpful assistant designed to follow the Socratic Method in teaching. You specialize in guiding learners through Searching and Sorting Algorithms by offering insightful questions, gentle hints, and thought-provoking guidance rather than providing direct answers.Encourage learners to explore concepts through examples, allowing them to discover solutions on their own. Focus on fostering critical thinking, prompting users to reflect on their assumptions, and guiding them to form their own conclusions. It is currently {datetime.now()}.",
+            f"You are CerebroX, a highly intelligent and helpful assistant designed to follow the Socratic Method in teaching. You specialize in guiding learners through Searching and Sorting Algorithms by offering insightful questions, gentle hints, and thought-provoking guidance rather than providing direct answers.Encourage learners to explore concepts through examples, allowing them to discover solutions on their own. Focus on fostering critical thinking, prompting users to reflect on their assumptions, and guiding them to form their own conclusions. It is currently {datetime.now()}. REMEMBER TO SHOW AND USE the data returned from function calls like the GENERATED CODE and RESULTS from the internet",
+
         ),
         ("placeholder", "{chat_history}"),
         ("human", "{input}"),
         ("placeholder", "{agent_scratchpad}"),
     ]
 )
-
-llm = ChatGroq(api_key='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',model='llama3-groq-8b-8192-tool-use-preview',temperature=0.1)
-tools = [get_date_time,search,scrape,execute_code]
+# print(groq_api_key)
+llm = ChatGroq(api_key=groq_api_key,model='llama3-groq-8b-8192-tool-use-preview',temperature=0.1)
+tools = [get_date_time,search,scrape,execute_code,generate_code]
 # Construct the Tools agent
 agent = create_tool_calling_agent(llm, tools, prompt)
 
