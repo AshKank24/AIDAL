@@ -8,8 +8,6 @@ import os
 import streamlit as st
 import google.generativeai as genai
 
-
-
 from datetime import datetime
 import pytz
 from duckduckgo_search import DDGS
@@ -17,7 +15,7 @@ from langchain_community.tools import DuckDuckGoSearchResults
 import requests
 from dotenv import load_dotenv
 
-from pymongo import MongoClient
+# from pymongo import MongoClient
 from datetime import datetime
 
 load_dotenv()
