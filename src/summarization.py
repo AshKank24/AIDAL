@@ -41,7 +41,7 @@ def summarize_dsa_topic(topic):
     return summaries
 
 #Example usage:
-topic = "binary search tree"
+topic = "9/11"
 results = summarize_dsa_topic(topic)
 for result in results:
     print(f"URL: {result['url']}")
