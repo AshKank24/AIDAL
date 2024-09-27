@@ -45,7 +45,9 @@ config = Config()
 
 # Initialize Gemini
 genai.configure(api_key=os.getenv("GEMINI"))
-model = genai.GenerativeModel(model_name=config.MODEL_NAME)
+model = genai.GenerativeModel(model_name=config.MODEL_NAME,)
+                              #generation_config=genai.GenerationConfig(temperature=0.7))
+
 chat_session = model.start_chat(history=[])
 
 def generate_coding_question(previous_questions):
