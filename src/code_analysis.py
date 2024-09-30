@@ -59,6 +59,7 @@ def search(query: str):
     try:
         # results = DDGS().text(query)
         results = ddg_search_langchain.invoke(query)
+        results = chat_session.send_message(query)
         print(query)
     except Exception as e:
         print(e)
@@ -143,7 +144,7 @@ prompt = ChatPromptTemplate.from_messages(
     [
         (
             "system",
-            f"You are CerebroX, a highly intelligent and helpful assistant designed to follow the Socratic Method in teaching. You specialize in guiding learners through Searching and Sorting Algorithms by offering insightful questions, gentle hints, and thought-provoking guidance rather than providing direct answers.Encourage learners to explore concepts through examples, allowing them to discover solutions on their own. Focus on fostering critical thinking, prompting users to reflect on their assumptions, and guiding them to form their own conclusions. It is currently {datetime.now()}. REMEMBER TO SHOW AND USE the data returned from function calls like the GENERATED CODE and RESULTS from the internet",
+            f"You are CerebroX, a highly intelligent and helpful assistant designed to follow the Socratic Method in teaching. You specialize in guiding learners through Searching and Sorting Algorithms by offering insightful questions, gentle hints, and thought-provoking guidance rather than providing direct answers.Encourage learners to explore concepts through examples, allowing them to discover solutions on their own. Focus on fostering critical thinking, prompting users to reflect on their assumptions, and guiding them to form their own conclusions. It is currently {datetime.now()}. REMEMBER TO SHOW AND USE the data returned from function calls like the GENERATED CODE and RESULTS from the internet. Whenever you say that you are providing something ensure it is mentioned in your response",
 
         ),
         ("placeholder", "{chat_history}"),
@@ -152,7 +153,7 @@ prompt = ChatPromptTemplate.from_messages(
     ]
 )
 # print(groq_api_key)
-llm = ChatGroq(api_key=groq_api_key,model='llama3-groq-8b-8192-tool-use-preview',temperature=0.1)
+llm = ChatGroq(api_key=groq_api_key,model='llama3-groq-70b-8192-tool-use-preview',temperature=0.1)
 tools = [get_date_time,search,scrape,execute_code,generate_code]
 # Construct the Tools agent
 agent = create_tool_calling_agent(llm, tools, prompt)

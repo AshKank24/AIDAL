@@ -1,111 +1,48 @@
 import streamlit as st
-from src.code_analysis import agent_executor
-from code_editor import code_editor
 
-your_code_string = '''
-def hello():
-    print('hello')
-'''
+st.set_page_config(page_title="Multipage App", page_icon="🚀", layout="wide")
 
-st.set_page_config(layout="wide")
+st.title("Welcome to the Multipage App")
 
-# Initialize chat history
-if "messages" not in st.session_state:
-    st.session_state.messages = [
-        {
-            "role": "assistant",
-            "content": "Hello , I am CerebroX and I am here to help you with Data Structures and Algorithms"
-        }
-    ]
-if "chat_history" not in st.session_state:
-    st.session_state["chat_history"] = []
+st.write("""
+This application consists of three main sections:
+1. Summarizer
+2. Code Editor
+3. Socrative Learning (Hinting)
 
-# Function to render chat messages
-def render_chat_messages():
-    for message in st.session_state.messages:
-        with st.chat_message(message["role"]):
-            st.markdown(message["content"])
+Use the sidebar to navigate between these sections.
+""")
 
-# LLM function to get the response
-def llm_function(query):
-    response = agent_executor.invoke({"input": query}, config={"configurable": {"session_id": "<foo>"}})
-    return response['output']
+st.sidebar.title("Navigation")
+page = st.sidebar.radio("Go to", ["Home", "Summarizer", "Code Editor", "Socrative Learning"])
 
-# Layout: Two columns for Chat (left) and Code Editor (right)
-col1, col2 = st.columns([2, 1])  # Adjust the ratio as needed
+if page == "Home":
+    st.header("Home")
+    st.write("This is the main page of our application. Choose a section from the sidebar to get started!")
 
-# Left Column: Chat Window
-with col1:
-    st.header("Chat Window")
-    render_chat_messages()
+    col1, col2, col3 = st.columns(3)
 
-# Right Column: Code Editor
-with col2:
-    st.header("Code Editor")
-    # Custom buttons for the code editor
-    custom_btns = [
-        {
-            "name": "Copy",
-            "feather": "Copy",
-            "hasText": True,
-            "alwaysOn": True,
-            "commands": ["copyAll", 
-                         ["infoMessage", 
-                          {
-                              "text": "Copied to clipboard!",
-                              "timeout": 2500, 
-                              "classToggle": "show"
-                          }
-                         ]
-                        ],
-            "style": {"right": "0.4rem"}
-        },
-        {
-            "name": "Run",
-            "feather": "Play",
-            "primary": True,
-            "hasText": True,
-            "showWithIcon": True,
-            "commands": ["submit", ["infoMessage", 
-                                    {
-                                        "text": "Code Executed!",
-                                        "timeout": 2500, 
-                                        "classToggle": "show"
-                                    }
-                                   ]],
-            "style": {"bottom": "0.44rem", "right": "0.4rem"}
-        }
-    ]
-    
-    # Add code editor with buttons
-    response_dict = code_editor(your_code_string, lang="python", height='400px', buttons=custom_btns)
+    with col1:
+        st.subheader("Summarizer")
+        st.write("Quickly summarize long texts or documents.")
+        if st.button("Go to Summarizer"):
+            st.switch_page("pages/summarizer.py")
 
-# Chat input area for user message
-query = st.chat_input("Enter your message")
+    with col2:
+        st.subheader("Code Editor")
+        st.write("Write, edit, and run code in various languages.")
+        if st.button("Go to Code Editor"):
+            st.switch_page("pages/chat_and_code_ui.py")
 
-# When a new message is entered
-if query:
-    # Append the user message to the chat history
-    st.session_state.messages.append(
-        {
-            "role": "user",
-            "content": query
-        }
-    )
-    
-    # Call the LLM function to get the response
-    res = llm_function(query)
-    
-    # Append the LLM response to the chat history
-    st.session_state.messages.append(
-        {
-            "role": "assistant",
-            "content": res
-        }
-    )
-    
-    # Re-render the chat messages dynamically
-    render_chat_messages()
-    
-    # This makes sure Streamlit doesn't cache the previous state and reruns the chat update
-    st.experimental_rerun()
+    with col3:
+        st.subheader("Socrative Learning")
+        st.write("Interactive learning with hints and guidance.")
+        if st.button("Go to Socrative Learning"):
+            st.switch_page("pages/socrative_learning.py")
+
+elif page == "Summarizer":
+    st.switch_page("pages/summarizer.py")
+elif page == "Code Editor":
+    st.switch_page("pages/chat_and_code_ui.py")
+elif page == "Socrative Learning":
+    st.switch_page("pages/socrative_learning.py")
