@@ -1,11 +1,12 @@
 # main_logic.py
 
 import os
+import logging
 import traceback
-import sys
-from io import StringIO
 from dotenv import load_dotenv
 import google.generativeai as genai
+import sys
+from io import StringIO  # Import StringIO for output redirection
 
 # Load environment variables
 load_dotenv()
@@ -17,7 +18,8 @@ class Config:
     MODEL_NAME = "gemini-1.5-pro"
 
 config = Config()
-model = genai.GenerativeModel(model_name=config.MODEL_NAME)
+model = genai.GenerativeModel(model_name=config.MODEL_NAME)  # Initialize the model
+
 chat_session = model.start_chat(history=[])
 
 def generate_coding_question(previous_questions):
@@ -32,7 +34,7 @@ def generate_coding_question(previous_questions):
     7. Provide 2-3 examples of inputs and expected outputs covering all edge cases.
     8. Ensure the question is not too similar to the previous questions.
     9. The question should be related to the topic of data structures and algorithms.
-    10. Please state clearly how the user should take input for the code.Should it be from standard input or should it be from a function.
+    10. Please state clearly how the user should take input for the code. Should it be from standard input or should it be from a function.
 
     Format your response as follows:
     Question: [Your generated question here]

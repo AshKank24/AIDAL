@@ -2,7 +2,7 @@
 
 import streamlit as st
 from streamlit_ace import st_ace
-from main_logic import generate_coding_question, check_user_code, generate_hint, run_user_code
+from hinting import generate_coding_question, check_user_code, generate_hint, run_user_code
 
 # Initialize session state
 if 'previous_questions' not in st.session_state:
