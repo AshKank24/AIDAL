@@ -26,7 +26,7 @@ if page == "Home":
         st.subheader("Summarizer")
         st.write("Quickly summarize long texts or documents.")
         if st.button("Go to Summarizer"):
-            st.switch_page("pages/summarizer.py")
+            st.switch_page("pages/summarization_ui.py")
 
     with col2:
         st.subheader("Code Editor")
@@ -38,11 +38,11 @@ if page == "Home":
         st.subheader("Socrative Learning")
         st.write("Interactive learning with hints and guidance.")
         if st.button("Go to Socrative Learning"):
-            st.switch_page("pages/socrative_learning.py")
+            st.switch_page("pages/hinting_ui.py")
 
 elif page == "Summarizer":
-    st.switch_page("pages/summarizer.py")
+    st.switch_page("pages/summarization_ui.py")
 elif page == "Code Editor":
     st.switch_page("pages/chat_and_code_ui.py")
 elif page == "Socrative Learning":
-    st.switch_page("pages/socrative_learning.py")
+    st.switch_page("pages/hinting_ui.py")
