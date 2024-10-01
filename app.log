@@ -394,3 +394,165 @@ google.api_core.exceptions.ResourceExhausted: 429 Resource has been exhausted (e
     raise exceptions.from_grpc_error(exc) from exc
 google.api_core.exceptions.ResourceExhausted: 429 Resource has been exhausted (e.g. check quota).
 
+2024-09-27 21:23:45,608 - __main__ - ERROR - Error generating question: 500 An internal error has occurred. Please retry or report in https://developers.generativeai.google/guide/troubleshooting
+2024-09-27 21:23:45,615 - __main__ - ERROR - Traceback (most recent call last):
+  File "D:\Google_Hackathon\CerebroX\src\hinting.py", line 81, in generate_coding_question
+    response = chat_session.send_message(prompt)
+  File "C:\Users\kanka\AppData\Local\Programs\Python\Python39\lib\site-packages\google\generativeai\generative_models.py", line 578, in send_message
+    response = self.model.generate_content(
+  File "C:\Users\kanka\AppData\Local\Programs\Python\Python39\lib\site-packages\google\generativeai\generative_models.py", line 331, in generate_content
+    response = self._client.generate_content(
+  File "C:\Users\kanka\AppData\Local\Programs\Python\Python39\lib\site-packages\google\ai\generativelanguage_v1beta\services\generative_service\client.py", line 830, in generate_content
+    response = rpc(
+  File "C:\Users\kanka\AppData\Local\Programs\Python\Python39\lib\site-packages\google\api_core\gapic_v1\method.py", line 131, in __call__
+    return wrapped_func(*args, **kwargs)
+  File "C:\Users\kanka\AppData\Local\Programs\Python\Python39\lib\site-packages\google\api_core\retry\retry_unary.py", line 293, in retry_wrapped_func
+    return retry_target(
+  File "C:\Users\kanka\AppData\Local\Programs\Python\Python39\lib\site-packages\google\api_core\retry\retry_unary.py", line 153, in retry_target
+    _retry_error_helper(
+  File "C:\Users\kanka\AppData\Local\Programs\Python\Python39\lib\site-packages\google\api_core\retry\retry_base.py", line 212, in _retry_error_helper
+    raise final_exc from source_exc
+  File "C:\Users\kanka\AppData\Local\Programs\Python\Python39\lib\site-packages\google\api_core\retry\retry_unary.py", line 144, in retry_target
+    result = target()
+  File "C:\Users\kanka\AppData\Local\Programs\Python\Python39\lib\site-packages\google\api_core\timeout.py", line 120, in func_with_timeout
+    return func(*args, **kwargs)
+  File "C:\Users\kanka\AppData\Local\Programs\Python\Python39\lib\site-packages\google\api_core\grpc_helpers.py", line 78, in error_remapped_callable
+    raise exceptions.from_grpc_error(exc) from exc
+google.api_core.exceptions.InternalServerError: 500 An internal error has occurred. Please retry or report in https://developers.generativeai.google/guide/troubleshooting
+
+2024-09-27 21:23:45,615 - __main__ - ERROR - Error in main while generating question: 500 An internal error has occurred. Please retry or report in https://developers.generativeai.google/guide/troubleshooting
+2024-09-27 21:23:45,615 - __main__ - ERROR - Traceback (most recent call last):
+  File "D:\Google_Hackathon\CerebroX\src\hinting.py", line 172, in main
+    question = generate_coding_question(st.session_state['previous_questions'])
+  File "D:\Google_Hackathon\CerebroX\src\hinting.py", line 81, in generate_coding_question
+    response = chat_session.send_message(prompt)
+  File "C:\Users\kanka\AppData\Local\Programs\Python\Python39\lib\site-packages\google\generativeai\generative_models.py", line 578, in send_message
+    response = self.model.generate_content(
+  File "C:\Users\kanka\AppData\Local\Programs\Python\Python39\lib\site-packages\google\generativeai\generative_models.py", line 331, in generate_content
+    response = self._client.generate_content(
+  File "C:\Users\kanka\AppData\Local\Programs\Python\Python39\lib\site-packages\google\ai\generativelanguage_v1beta\services\generative_service\client.py", line 830, in generate_content
+    response = rpc(
+  File "C:\Users\kanka\AppData\Local\Programs\Python\Python39\lib\site-packages\google\api_core\gapic_v1\method.py", line 131, in __call__
+    return wrapped_func(*args, **kwargs)
+  File "C:\Users\kanka\AppData\Local\Programs\Python\Python39\lib\site-packages\google\api_core\retry\retry_unary.py", line 293, in retry_wrapped_func
+    return retry_target(
+  File "C:\Users\kanka\AppData\Local\Programs\Python\Python39\lib\site-packages\google\api_core\retry\retry_unary.py", line 153, in retry_target
+    _retry_error_helper(
+  File "C:\Users\kanka\AppData\Local\Programs\Python\Python39\lib\site-packages\google\api_core\retry\retry_base.py", line 212, in _retry_error_helper
+    raise final_exc from source_exc
+  File "C:\Users\kanka\AppData\Local\Programs\Python\Python39\lib\site-packages\google\api_core\retry\retry_unary.py", line 144, in retry_target
+    result = target()
+  File "C:\Users\kanka\AppData\Local\Programs\Python\Python39\lib\site-packages\google\api_core\timeout.py", line 120, in func_with_timeout
+    return func(*args, **kwargs)
+  File "C:\Users\kanka\AppData\Local\Programs\Python\Python39\lib\site-packages\google\api_core\grpc_helpers.py", line 78, in error_remapped_callable
+    raise exceptions.from_grpc_error(exc) from exc
+google.api_core.exceptions.InternalServerError: 500 An internal error has occurred. Please retry or report in https://developers.generativeai.google/guide/troubleshooting
+
+2024-09-27 21:23:50,590 - __main__ - ERROR - Error generating question: 500 An internal error has occurred. Please retry or report in https://developers.generativeai.google/guide/troubleshooting
+2024-09-27 21:23:50,590 - __main__ - ERROR - Traceback (most recent call last):
+  File "D:\Google_Hackathon\CerebroX\src\hinting.py", line 81, in generate_coding_question
+    response = chat_session.send_message(prompt)
+  File "C:\Users\kanka\AppData\Local\Programs\Python\Python39\lib\site-packages\google\generativeai\generative_models.py", line 578, in send_message
+    response = self.model.generate_content(
+  File "C:\Users\kanka\AppData\Local\Programs\Python\Python39\lib\site-packages\google\generativeai\generative_models.py", line 331, in generate_content
+    response = self._client.generate_content(
+  File "C:\Users\kanka\AppData\Local\Programs\Python\Python39\lib\site-packages\google\ai\generativelanguage_v1beta\services\generative_service\client.py", line 830, in generate_content
+    response = rpc(
+  File "C:\Users\kanka\AppData\Local\Programs\Python\Python39\lib\site-packages\google\api_core\gapic_v1\method.py", line 131, in __call__
+    return wrapped_func(*args, **kwargs)
+  File "C:\Users\kanka\AppData\Local\Programs\Python\Python39\lib\site-packages\google\api_core\retry\retry_unary.py", line 293, in retry_wrapped_func
+    return retry_target(
+  File "C:\Users\kanka\AppData\Local\Programs\Python\Python39\lib\site-packages\google\api_core\retry\retry_unary.py", line 153, in retry_target
+    _retry_error_helper(
+  File "C:\Users\kanka\AppData\Local\Programs\Python\Python39\lib\site-packages\google\api_core\retry\retry_base.py", line 212, in _retry_error_helper
+    raise final_exc from source_exc
+  File "C:\Users\kanka\AppData\Local\Programs\Python\Python39\lib\site-packages\google\api_core\retry\retry_unary.py", line 144, in retry_target
+    result = target()
+  File "C:\Users\kanka\AppData\Local\Programs\Python\Python39\lib\site-packages\google\api_core\timeout.py", line 120, in func_with_timeout
+    return func(*args, **kwargs)
+  File "C:\Users\kanka\AppData\Local\Programs\Python\Python39\lib\site-packages\google\api_core\grpc_helpers.py", line 78, in error_remapped_callable
+    raise exceptions.from_grpc_error(exc) from exc
+google.api_core.exceptions.InternalServerError: 500 An internal error has occurred. Please retry or report in https://developers.generativeai.google/guide/troubleshooting
+
+2024-09-27 21:23:50,590 - __main__ - ERROR - Error in main while generating question: 500 An internal error has occurred. Please retry or report in https://developers.generativeai.google/guide/troubleshooting
+2024-09-27 21:23:50,599 - __main__ - ERROR - Traceback (most recent call last):
+  File "D:\Google_Hackathon\CerebroX\src\hinting.py", line 172, in main
+    question = generate_coding_question(st.session_state['previous_questions'])
+  File "D:\Google_Hackathon\CerebroX\src\hinting.py", line 81, in generate_coding_question
+    response = chat_session.send_message(prompt)
+  File "C:\Users\kanka\AppData\Local\Programs\Python\Python39\lib\site-packages\google\generativeai\generative_models.py", line 578, in send_message
+    response = self.model.generate_content(
+  File "C:\Users\kanka\AppData\Local\Programs\Python\Python39\lib\site-packages\google\generativeai\generative_models.py", line 331, in generate_content
+    response = self._client.generate_content(
+  File "C:\Users\kanka\AppData\Local\Programs\Python\Python39\lib\site-packages\google\ai\generativelanguage_v1beta\services\generative_service\client.py", line 830, in generate_content
+    response = rpc(
+  File "C:\Users\kanka\AppData\Local\Programs\Python\Python39\lib\site-packages\google\api_core\gapic_v1\method.py", line 131, in __call__
+    return wrapped_func(*args, **kwargs)
+  File "C:\Users\kanka\AppData\Local\Programs\Python\Python39\lib\site-packages\google\api_core\retry\retry_unary.py", line 293, in retry_wrapped_func
+    return retry_target(
+  File "C:\Users\kanka\AppData\Local\Programs\Python\Python39\lib\site-packages\google\api_core\retry\retry_unary.py", line 153, in retry_target
+    _retry_error_helper(
+  File "C:\Users\kanka\AppData\Local\Programs\Python\Python39\lib\site-packages\google\api_core\retry\retry_base.py", line 212, in _retry_error_helper
+    raise final_exc from source_exc
+  File "C:\Users\kanka\AppData\Local\Programs\Python\Python39\lib\site-packages\google\api_core\retry\retry_unary.py", line 144, in retry_target
+    result = target()
+  File "C:\Users\kanka\AppData\Local\Programs\Python\Python39\lib\site-packages\google\api_core\timeout.py", line 120, in func_with_timeout
+    return func(*args, **kwargs)
+  File "C:\Users\kanka\AppData\Local\Programs\Python\Python39\lib\site-packages\google\api_core\grpc_helpers.py", line 78, in error_remapped_callable
+    raise exceptions.from_grpc_error(exc) from exc
+google.api_core.exceptions.InternalServerError: 500 An internal error has occurred. Please retry or report in https://developers.generativeai.google/guide/troubleshooting
+
+2024-09-27 21:23:56,616 - __main__ - ERROR - Error generating question: 500 An internal error has occurred. Please retry or report in https://developers.generativeai.google/guide/troubleshooting
+2024-09-27 21:23:56,616 - __main__ - ERROR - Traceback (most recent call last):
+  File "D:\Google_Hackathon\CerebroX\src\hinting.py", line 81, in generate_coding_question
+    response = chat_session.send_message(prompt)
+  File "C:\Users\kanka\AppData\Local\Programs\Python\Python39\lib\site-packages\google\generativeai\generative_models.py", line 578, in send_message
+    response = self.model.generate_content(
+  File "C:\Users\kanka\AppData\Local\Programs\Python\Python39\lib\site-packages\google\generativeai\generative_models.py", line 331, in generate_content
+    response = self._client.generate_content(
+  File "C:\Users\kanka\AppData\Local\Programs\Python\Python39\lib\site-packages\google\ai\generativelanguage_v1beta\services\generative_service\client.py", line 830, in generate_content
+    response = rpc(
+  File "C:\Users\kanka\AppData\Local\Programs\Python\Python39\lib\site-packages\google\api_core\gapic_v1\method.py", line 131, in __call__
+    return wrapped_func(*args, **kwargs)
+  File "C:\Users\kanka\AppData\Local\Programs\Python\Python39\lib\site-packages\google\api_core\retry\retry_unary.py", line 293, in retry_wrapped_func
+    return retry_target(
+  File "C:\Users\kanka\AppData\Local\Programs\Python\Python39\lib\site-packages\google\api_core\retry\retry_unary.py", line 153, in retry_target
+    _retry_error_helper(
+  File "C:\Users\kanka\AppData\Local\Programs\Python\Python39\lib\site-packages\google\api_core\retry\retry_base.py", line 212, in _retry_error_helper
+    raise final_exc from source_exc
+  File "C:\Users\kanka\AppData\Local\Programs\Python\Python39\lib\site-packages\google\api_core\retry\retry_unary.py", line 144, in retry_target
+    result = target()
+  File "C:\Users\kanka\AppData\Local\Programs\Python\Python39\lib\site-packages\google\api_core\timeout.py", line 120, in func_with_timeout
+    return func(*args, **kwargs)
+  File "C:\Users\kanka\AppData\Local\Programs\Python\Python39\lib\site-packages\google\api_core\grpc_helpers.py", line 78, in error_remapped_callable
+    raise exceptions.from_grpc_error(exc) from exc
+google.api_core.exceptions.InternalServerError: 500 An internal error has occurred. Please retry or report in https://developers.generativeai.google/guide/troubleshooting
+
+2024-09-27 21:23:56,624 - __main__ - ERROR - Error in main while generating question: 500 An internal error has occurred. Please retry or report in https://developers.generativeai.google/guide/troubleshooting
+2024-09-27 21:23:56,624 - __main__ - ERROR - Traceback (most recent call last):
+  File "D:\Google_Hackathon\CerebroX\src\hinting.py", line 172, in main
+    question = generate_coding_question(st.session_state['previous_questions'])
+  File "D:\Google_Hackathon\CerebroX\src\hinting.py", line 81, in generate_coding_question
+    response = chat_session.send_message(prompt)
+  File "C:\Users\kanka\AppData\Local\Programs\Python\Python39\lib\site-packages\google\generativeai\generative_models.py", line 578, in send_message
+    response = self.model.generate_content(
+  File "C:\Users\kanka\AppData\Local\Programs\Python\Python39\lib\site-packages\google\generativeai\generative_models.py", line 331, in generate_content
+    response = self._client.generate_content(
+  File "C:\Users\kanka\AppData\Local\Programs\Python\Python39\lib\site-packages\google\ai\generativelanguage_v1beta\services\generative_service\client.py", line 830, in generate_content
+    response = rpc(
+  File "C:\Users\kanka\AppData\Local\Programs\Python\Python39\lib\site-packages\google\api_core\gapic_v1\method.py", line 131, in __call__
+    return wrapped_func(*args, **kwargs)
+  File "C:\Users\kanka\AppData\Local\Programs\Python\Python39\lib\site-packages\google\api_core\retry\retry_unary.py", line 293, in retry_wrapped_func
+    return retry_target(
+  File "C:\Users\kanka\AppData\Local\Programs\Python\Python39\lib\site-packages\google\api_core\retry\retry_unary.py", line 153, in retry_target
+    _retry_error_helper(
+  File "C:\Users\kanka\AppData\Local\Programs\Python\Python39\lib\site-packages\google\api_core\retry\retry_base.py", line 212, in _retry_error_helper
+    raise final_exc from source_exc
+  File "C:\Users\kanka\AppData\Local\Programs\Python\Python39\lib\site-packages\google\api_core\retry\retry_unary.py", line 144, in retry_target
+    result = target()
+  File "C:\Users\kanka\AppData\Local\Programs\Python\Python39\lib\site-packages\google\api_core\timeout.py", line 120, in func_with_timeout
+    return func(*args, **kwargs)
+  File "C:\Users\kanka\AppData\Local\Programs\Python\Python39\lib\site-packages\google\api_core\grpc_helpers.py", line 78, in error_remapped_callable
+    raise exceptions.from_grpc_error(exc) from exc
+google.api_core.exceptions.InternalServerError: 500 An internal error has occurred. Please retry or report in https://developers.generativeai.google/guide/troubleshooting
+
