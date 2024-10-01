@@ -17,7 +17,7 @@ from langchain_community.tools import DuckDuckGoSearchResults
 import requests
 from dotenv import load_dotenv
 
-from pymongo import MongoClient
+# from pymongo import MongoClient
 from datetime import datetime
 
 load_dotenv()
@@ -175,61 +175,3 @@ agent_executor = RunnableWithMessageHistory(
     input_messages_key="input",
     history_messages_key="chat_history",
 )
-
-
-
-# # Initialize chat history
-# if "messages" not in st.session_state:
-#     st.session_state.messages = [
-#         {
-#             "role":"assistant",
-#             "content":"Hello , I am CerebroX and i am here to help you how to Search and Sort."
-#         }
-#     ]
-# if "chat_history" not in st.session_state:
-#     st.session_state["chat_history"] = []
-
-# # Display chat messages from history on app rerun
-# for message in st.session_state.messages:
-#     with st.chat_message(message["role"]):
-#         st.markdown(message["content"])
-
-
-# # Process and store Query and Response
-
-# def llm_function(query):
-#     response = agent_executor.invoke({"input": query},config={"configurable": {"session_id": "<foo>"}})
-#     # print(response)
-#     st.session_state["chat_history"].append(("You", query))
-#     st.session_state["chat_history"].append(("Shree", response["output"]))
-
-#     with st.chat_message("assistant"):
-#         st.markdown(response['output'])
-
-
-#     # Storing the User Message
-#     st.session_state.messages.append(
-#         {
-#             "role":"user",
-#             "content": query
-#         }
-#     )
-
-#     # Storing the User Message
-#     st.session_state.messages.append(
-#         {
-#             "role":"assistant",
-#             "content": response['output']
-#         }
-#     )
-   
-# # Accept user input
-# query = st.chat_input("Enter Your Message")
-
-# # Calling the Function when Input is Provided
-# if query:
-#     # Displaying the User Message
-#     with st.chat_message("user"):
-#         st.markdown(query)
-
-#     llm_function(query)
