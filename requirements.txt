@@ -6,3 +6,4 @@ groq==0.10.0
 duckduckgo-search==6.2.10
 langchain-groq==0.1.8
 streamlit_code_editor==0.1.21
+streamlit_ace==0.1.1
