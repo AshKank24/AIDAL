@@ -8,12 +8,12 @@ sys.path.append(str(project_root))
 from src.code_analysis import agent_executor
 from code_editor import code_editor
 
-st.set_page_config(layout="wide", page_title="CerebroX - AI Coding Assistant", page_icon="🧠")
+st.set_page_config(layout="wide", page_title="Aidal - AI Assistant")
 
 # Initialize session state
 if "messages" not in st.session_state:
     st.session_state.messages = [
-        {"role": "assistant", "content": "Hello, I'm CerebroX. How can I assist you with Data Structures and Algorithms?"}
+        {"role": "assistant", "content": "Hello, I'm Aidal. How can I assist you with Data Structures and Algorithms?"}
     ]
 
 # LLM function
@@ -22,7 +22,7 @@ def llm_function(query):
     return response['output']
 
 # Main content area
-main_container = st.container(height=600)
+main_container = st.container(height=500)
 
 # Input container at the bottom
 input_container = st.container()
@@ -33,8 +33,8 @@ with main_container:
 
     # Chat Window
     with col1:
-        st.header("Chat with CerebroX")
-        chat_container = st.container(height=500)
+        st.header("Chat with Aidal")
+        chat_container = st.container(height=400)
         
         # Display chat messages
         with chat_container:
@@ -45,25 +45,41 @@ with main_container:
     # Code Editor
     with col2:
         st.header("Code Editor")
-        code = """def example():
-    print("Hello, World!")
-"""
-        editor = code_editor(code, lang="python", height='500px', buttons=[
+        code = """
+# Use this space to write your code with proper indentation
+
+def hello():
+    print("Hello, I am Aidal.")
+
+                """
+        editor = code_editor(code, lang="python", height='350px', buttons=[
             {
-                "name": "Run",
-                "feather": "Play",
-                "primary": True,
+                "name": "Copy",
+                "feather": "Copy",
                 "hasText": True,
-                "commands": ["submit"],
                 "alwaysOn": True,
-                "style": {"right": "0.4rem"}
+                "commands": [
+                "copyAll",
+                [
+                    "infoMessage",
+                    {
+                    "text": "Copied to clipboard!",
+                    "timeout": 2500,
+                    "classToggle": "show"
+                    }
+                ]
+                ],
+                "style": {
+                "top": "0rem",
+                "right": "0.4rem"
+                }
             }
         ])
         
         if editor['type'] == 'submit':
-            st.code(editor['text'])  # Display the code
+            # st.code(editor['text'])  # Display the code
             # Here you would typically execute the code and show the output
-            st.write("Code execution placeholder")
+            st.code("Code copied")
 
 # Chat input at the bottom
 with input_container:

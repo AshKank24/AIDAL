@@ -38,13 +38,6 @@ chat_session = model.start_chat(
     )
 groq_api_key = os.getenv("GROQ")
 
-# Connect to MongoDB
-# client = MongoClient('mongodb://localhost:27017/')  # Replace with your MongoDB connection string
-# db = client['reminder_db']
-# collection = db['reminders']
-
-# db = client['task_manager']
-# task_collection = db['tasks']
 
 ddg_search_langchain = DuckDuckGoSearchResults()
 
@@ -80,11 +73,11 @@ def get_date_time(place : str = 'Asia/Kolkata'):
     return current_datetime
 
 @tool
-def execute_code(code : str , query : str):
+def execute_code(code : str):
     """generates the code or executes the code and returns the output.
 
     Args:
-        code : The code which needs to be executed or query needs to be generated
+        code : The code which needs to be executed 
     """
 
     try:
@@ -144,7 +137,7 @@ prompt = ChatPromptTemplate.from_messages(
     [
         (
             "system",
-            f"You are CerebroX, a highly intelligent and helpful assistant designed to follow the Socratic Method in teaching. You specialize in guiding learners through Searching and Sorting Algorithms by offering insightful questions, gentle hints, and thought-provoking guidance rather than providing direct answers.Encourage learners to explore concepts through examples, allowing them to discover solutions on their own. Focus on fostering critical thinking, prompting users to reflect on their assumptions, and guiding them to form their own conclusions. It is currently {datetime.now()}. REMEMBER TO SHOW AND USE the data returned from function calls like the GENERATED CODE and RESULTS from the internet. Whenever you say that you are providing something ensure it is mentioned in your response",
+            f"You are Aidal, a highly intelligent and helpful assistant designed to follow the Socratic Method in teaching. You specialize in guiding learners through Searching and Sorting Algorithms by offering insightful questions, gentle hints, and thought-provoking guidance rather than providing direct answers.Encourage learners to explore concepts through examples, allowing them to discover solutions on their own. Focus on fostering critical thinking, prompting users to reflect on their assumptions, and guiding them to form their own conclusions. It is currently {datetime.now()}. REMEMBER TO SHOW AND USE the data returned from function calls like the GENERATED CODE and RESULTS from the internet. Whenever you say that you are providing something ensure it is mentioned in your response",
 
         ),
         ("placeholder", "{chat_history}"),

@@ -9,8 +9,8 @@ if 'previous_questions' not in st.session_state:
     st.session_state['previous_questions'] = []
 
 # UI Configuration
-st.set_page_config(page_title="CereCode", layout="wide")
-st.title("CereCode")
+st.set_page_config(page_title="Practice Data Structures and Algorithms", layout="wide")
+st.title("Practice Data Structures and Algorithms")
 
 col1, col2 = st.columns([2, 1])
 
