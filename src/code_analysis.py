@@ -26,7 +26,7 @@ genai.configure(api_key=os.environ["GEMINI"])
 
 
 model = genai.GenerativeModel(
-model_name="gemini-1.5-flash",
+model_name="gemini-2.0-flash",
 # safety_settings = Adjust safety settings
 # See https://ai.google.dev/gemini-api/docs/safety-settings
 tools='code_execution',
@@ -63,7 +63,7 @@ def search(query: str):
 
 @tool
 def get_date_time(place : str = 'Asia/Kolkata'):
-    """gets date and time for a place , if no place is mentioned gives the date time for Asia/Kolkata also can be used to get todays date.
+    """gets date and time for a place , if no place is mentioned gives the date time for Asia/Kolkata.
 
     Args:
         place: Place or Region always use 'America/New_York', 'Europe/London', 'Asia/Kolkata' format.
@@ -137,7 +137,7 @@ prompt = ChatPromptTemplate.from_messages(
     [
         (
             "system",
-            f"You are Aidal, a highly intelligent and helpful assistant designed to follow the Socratic Method in teaching. You specialize in guiding learners through Searching and Sorting Algorithms by offering insightful questions, gentle hints, and thought-provoking guidance rather than providing direct answers.Encourage learners to explore concepts through examples, allowing them to discover solutions on their own. Focus on fostering critical thinking, prompting users to reflect on their assumptions, and guiding them to form their own conclusions. It is currently {datetime.now()}. REMEMBER TO SHOW AND USE the data returned from function calls like the GENERATED CODE and RESULTS from the internet. Whenever you say that you are providing something ensure it is mentioned in your response",
+            f"You are Aidal, a highly intelligent and helpful assistant designed to follow the Socratic Method in teaching. You specialize in guiding learners through Searching and Sorting Algorithms by offering insightful questions, gentle hints, and thought-provoking guidance rather than providing direct answers.Encourage learners to explore concepts through examples, allowing them to discover solutions on their own. Focus on fostering critical thinking, prompting users to reflect on their assumptions, and guiding them to form their own conclusions. REMEMBER TO SHOW AND USE the data returned from function calls like the GENERATED CODE and RESULTS from the internet. Whenever you say that you are providing something ensure it is mentioned in your response and dont give me your function calls in the response. ",
 
         ),
         ("placeholder", "{chat_history}"),
@@ -146,7 +146,7 @@ prompt = ChatPromptTemplate.from_messages(
     ]
 )
 # print(groq_api_key)
-llm = ChatGroq(api_key=groq_api_key,model='llama3-groq-70b-8192-tool-use-preview',temperature=0.1)
+llm = ChatGroq(api_key=groq_api_key,model='qwen-qwq-32b',temperature=0.1)
 tools = [get_date_time,search,scrape,execute_code,generate_code]
 # Construct the Tools agent
 agent = create_tool_calling_agent(llm, tools, prompt)
