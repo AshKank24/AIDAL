@@ -1,10 +1,9 @@
 import requests
 from bs4 import BeautifulSoup
-from duckduckgo_search import DDGS
 import google.generativeai as genai
 import os
 from dotenv import load_dotenv
-from googleapiclient.discovery import build
+from googlesearch import search
 
 load_dotenv()
 
@@ -13,13 +12,17 @@ genai.configure(api_key=os.environ["GEMINI"])
 model = genai.GenerativeModel("gemini-1.5-flash")
 
 def search_dsa_topic(topic):
-    my_api_key = os.environ["GOOGLE_API_KEY"]
-    my_cse_id = os.environ["GOOGLE_CSE_ID"]
-    
-    service = build("customsearch", "v1", developerKey=my_api_key)
-    results = service.cse().list(q=f"{topic} data structures and algorithms", cx=my_cse_id, num=4).execute()
-    
-    return [result['link'] for result in results['items']]
+    try:        
+        # Perform the search with appropriate parameters
+        query = f"{topic} data structures and algorithms"
+        results = search(query, num_results=4, lang="en")
+        
+        # Convert generator to list
+        return list(results)
+    except Exception as e:
+        print(f"Error during search: {e}")
+        # Fallback to a predefined list of educational DSA resources
+        return None
 
 def scrape_content(url):
     response = requests.get(url)
@@ -44,10 +47,3 @@ def summarize_dsa_topic(topic):
         summaries.append({"url": url, "summary": summary})
     
     return summaries
-
-#Example usage:
-topic = "binary search tree"
-results = summarize_dsa_topic(topic)
-for result in results:
-    print(f"URL: {result['url']}")
-    print(f"Summary: {result['summary']}\n")
